@@ -31,5 +31,23 @@ public class AuthController {
                 }
             }
         });
+        
+        view.addRegistroListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	view.setVisible(false);
+                view.mostrarVentanaRegistro(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        Object[] data = (Object[]) e.getSource();
+                        String usuario = (String) data[0];
+                        String contraseña = (String) data[1];
+                        String email = (String) data[2];
+                        model.registro(usuario, contraseña, email);
+                    }
+                });
+            }
+        });
+            
     }
 }
