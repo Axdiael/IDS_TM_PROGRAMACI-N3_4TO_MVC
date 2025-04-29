@@ -4,8 +4,11 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JOptionPane;
+
 import models.AuthModel;
 import views.AuthView;
+
 
 public class AuthController {
 	private AuthView view;
@@ -25,9 +28,14 @@ public class AuthController {
                 String contraseña = view.getContraseña();
 
                 if (model.autenticar(usuario, contraseña)) {
-                    view.setMensaje("Bienvenido.", Color.GREEN);
+                    view.setVisible(false);
+                    view.mostrarVentanaHome(); 
                 } else {
-                    view.setMensaje("Usuario o contraseña incorrectos.", Color.RED);
+                    JOptionPane.showMessageDialog(view, 
+                        "Usuario o contraseña incorrectos", 
+                        "Error de autenticacion", 
+                        JOptionPane.ERROR_MESSAGE);
+                    view.limpiarCampos();
                 }
             }
         });

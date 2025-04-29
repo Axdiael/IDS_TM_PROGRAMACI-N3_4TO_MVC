@@ -131,7 +131,7 @@ public class AuthView extends JFrame{
             JTextField regUsuarioField = new JTextField();
             regUsuarioField.setBounds(100, 140, 250, 30);
             regUsuarioField.setFont(texto2);
-        panelRegistro.add(regUsuarioField);
+            panelRegistro.add(regUsuarioField);
 
             JLabel contraseñaLabel = new JLabel("Contraseña:");
             contraseñaLabel.setBounds(50, 180, 150, 30);
@@ -203,6 +203,41 @@ public class AuthView extends JFrame{
         }
         registroFrame.setVisible(true);
     }
+	
+	public void mostrarVentanaHome() {
+	    JFrame homeFrame = new JFrame("Bienvenido - Home");
+	    homeFrame.setSize(500, 400);
+	    homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	    homeFrame.setLocationRelativeTo(null);
+	    homeFrame.setResizable(false);
+	    homeFrame.setLayout(null);
+
+	    JPanel homePanel = new JPanel();
+	    homePanel.setLayout(null);
+	    homePanel.setBackground(Color.decode("#bfdeed"));
+	    homePanel.setBounds(0, 0, 500, 400);
+
+	    JLabel welcomeLabel = new JLabel("¡Bienvenido al Sistema!", SwingConstants.CENTER);
+	    welcomeLabel.setBounds(0, 50, 500, 50);
+	    welcomeLabel.setFont(texto);
+	    homePanel.add(welcomeLabel);
+
+	    JButton logoutButton = new JButton("Cerrar Sesión");
+	    logoutButton.setBounds(175, 300, 150, 50);
+	    logoutButton.setFont(texto2);
+	    logoutButton.setBackground(Color.WHITE);
+	    logoutButton.setForeground(Color.BLACK);
+	    homePanel.add(logoutButton);
+
+	    logoutButton.addActionListener(e -> {
+	        homeFrame.dispose();
+	        this.setVisible(true);
+	        limpiarCampos();
+	    });
+
+	    homeFrame.add(homePanel);
+	    homeFrame.setVisible(true);
+	}
 
     public String getUsuario() {
         return usuarioField.getText();
@@ -236,4 +271,5 @@ public class AuthView extends JFrame{
         contraseñaField.setText("");
         mensajeLabel.setText("");
     }
+    
 }
