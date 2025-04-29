@@ -5,10 +5,13 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.AbstractButton;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -108,7 +111,7 @@ public class AuthView extends JFrame{
 	public void mostrarVentanaRegistro(ActionListener registrarListener) {
         if (registroFrame == null) {
             registroFrame = new JFrame("Registro");
-            registroFrame.setSize(420, 600);
+            registroFrame.setSize(800, 700);
             registroFrame.setLocationRelativeTo(null);
             registroFrame.setResizable(false);
             registroFrame.setLayout(null);
@@ -116,82 +119,225 @@ public class AuthView extends JFrame{
             JPanel panelRegistro = new JPanel();
             panelRegistro.setLayout(null);
             panelRegistro.setBackground(Color.decode("#bfdeed"));
-            panelRegistro.setBounds(0, 0, 420, 600);
+            panelRegistro.setBounds(0, 0, 800, 700);
 
             JLabel titulo = new JLabel("Registro de Usuario", SwingConstants.CENTER);
-            titulo.setBounds(0, 50, 420, 50);
+            titulo.setBounds(0, 20, 800, 50);
             titulo.setFont(texto);
             panelRegistro.add(titulo);
+            
+            JLabel nombresLabel = new JLabel("Nombres:");
+            nombresLabel.setBounds(100, 80, 100, 30);
+            nombresLabel.setFont(texto2);
+            panelRegistro.add(nombresLabel);
+
+            JTextField nombresField = new JTextField();
+            nombresField.setBounds(200, 80, 200, 30);
+            nombresField.setFont(texto2);
+            nombresField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                        e.consume();
+                    }
+                }
+            });
+            panelRegistro.add(nombresField);
+
+            JLabel apellidosLabel = new JLabel("Apellidos:");
+            apellidosLabel.setBounds(420, 80, 100, 30);
+            apellidosLabel.setFont(texto2);
+            panelRegistro.add(apellidosLabel);
+
+            JTextField apellidosField = new JTextField();
+            apellidosField.setBounds(520, 80, 200, 30);
+            apellidosField.setFont(texto2);
+            apellidosField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                        e.consume();
+                    }
+                }
+            });
+            panelRegistro.add(apellidosField);
+
+            JLabel empresaLabel = new JLabel("Empresa:");
+            empresaLabel.setBounds(100, 130, 100, 30);
+            empresaLabel.setFont(texto2);
+            panelRegistro.add(empresaLabel);
+
+            JTextField empresaField = new JTextField();
+            empresaField.setBounds(200, 130, 200, 30);
+            empresaField.setFont(texto2);
+            empresaField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetterOrDigit(c) && !Character.isWhitespace(c)) {
+                        e.consume();
+                    }
+                }
+            });
+            panelRegistro.add(empresaField);
+
+           
+            JLabel ambitoLabel = new JLabel("Ámbito:");
+            ambitoLabel.setBounds(420, 130, 100, 30);
+            ambitoLabel.setFont(texto2);
+            panelRegistro.add(ambitoLabel);
+
+            JComboBox<String> ambitoCombo = new JComboBox<>(new String[]{"Tecnología", "Salud", "Educación", "Comercio", "Otro"});
+            ambitoCombo.setBounds(520, 130, 200, 30);
+            ambitoCombo.setFont(texto2);
+            panelRegistro.add(ambitoCombo);
+
+            JLabel cargoLabel = new JLabel("Cargo:");
+            cargoLabel.setBounds(100, 180, 100, 30);
+            cargoLabel.setFont(texto2);
+            panelRegistro.add(cargoLabel);
+
+            JTextField cargoField = new JTextField();
+            cargoField.setBounds(200, 180, 200, 30);
+            cargoField.setFont(texto2);
+            cargoField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                        e.consume();
+                    }
+                }
+            });
+            panelRegistro.add(cargoField);
 
             JLabel usuarioLabel = new JLabel("Usuario:");
-            usuarioLabel.setBounds(50, 110, 150, 30);
+            usuarioLabel.setBounds(420, 180, 100, 30);
             usuarioLabel.setFont(texto2);
             panelRegistro.add(usuarioLabel);
 
             JTextField regUsuarioField = new JTextField();
-            regUsuarioField.setBounds(100, 140, 250, 30);
+            regUsuarioField.setBounds(520, 180, 200, 30);
             regUsuarioField.setFont(texto2);
+            regUsuarioField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetter(c) && !Character.isWhitespace(c)) {
+                        e.consume();
+                    }
+                }
+            });
             panelRegistro.add(regUsuarioField);
 
             JLabel contraseñaLabel = new JLabel("Contraseña:");
-            contraseñaLabel.setBounds(50, 180, 150, 30);
+            contraseñaLabel.setBounds(100, 230, 100, 30);
             contraseñaLabel.setFont(texto2);
             panelRegistro.add(contraseñaLabel);
 
             JPasswordField regContraseñaField = new JPasswordField();
-            regContraseñaField.setBounds(100, 210, 250, 30);
+            regContraseñaField.setBounds(200, 230, 200, 30);
             regContraseñaField.setFont(texto2);
+            regContraseñaField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (Character.isWhitespace(c) || 
+                            (!Character.isLetterOrDigit(c) && "!@#$%^&*".indexOf(c) < 0)) {
+                            e.consume();
+                        }
+                }
+            });
             panelRegistro.add(regContraseñaField);
 
-            JLabel emailLabel = new JLabel("Email:");
-            emailLabel.setBounds(50, 250, 150, 30);
-            emailLabel.setFont(texto2);
-            panelRegistro.add(emailLabel);
+            JLabel repetirContraseñaLabel = new JLabel("Repetir Contraseña:");
+            repetirContraseñaLabel.setBounds(420, 230, 150, 30);
+            repetirContraseñaLabel.setFont(texto2);
+            panelRegistro.add(repetirContraseñaLabel);
 
-            JTextField emailField = new JTextField();
-            emailField.setBounds(100, 280, 250, 30);
-            emailField.setFont(texto2);
-            panelRegistro.add(emailField);
+            JPasswordField repetirContraseñaField = new JPasswordField();
+            repetirContraseñaField.setBounds(570, 230, 150, 30);
+            repetirContraseñaField.setFont(texto2);
+            repetirContraseñaField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (Character.isWhitespace(c) || 
+                            (!Character.isLetterOrDigit(c) && "!@#$%^&*".indexOf(c) < 0)) {
+                            e.consume();
+                        }
+                }
+            });
+            panelRegistro.add(repetirContraseñaField);
+
+            JLabel correoLabel = new JLabel("Correo:");
+            correoLabel.setBounds(100, 280, 100, 30);
+            correoLabel.setFont(texto2);
+            panelRegistro.add(correoLabel);
+
+            JTextField correoField = new JTextField();
+            correoField.setBounds(200, 280, 520, 30);
+            correoField.setFont(texto2);
+            correoField.addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyTyped(KeyEvent e) {
+                    char c = e.getKeyChar();
+                    if (!Character.isLetterOrDigit(c) && "!@#$%^&*.".indexOf(c) < 0) {
+                            e.consume();
+                        }
+                }
+            });
+            panelRegistro.add(correoField);
 
             JButton registrarButton = new JButton("Registrar");
-            registrarButton.setBounds(135, 360, 150, 50);
+            registrarButton.setBounds(250, 350, 130, 40);
             registrarButton.setFont(texto2);
             registrarButton.setBackground(Color.WHITE);
             registrarButton.setForeground(Color.BLACK);
             panelRegistro.add(registrarButton);
 
             JButton regresarButton = new JButton("Regresar");
-            regresarButton.setBounds(135, 420, 150, 50);
+            regresarButton.setBounds(420, 350, 130, 40);
             regresarButton.setFont(texto2);
             regresarButton.setBackground(Color.WHITE);
             regresarButton.setForeground(Color.BLACK);
             panelRegistro.add(regresarButton);
 
             JLabel regMensajeLabel = new JLabel("", SwingConstants.CENTER);
-            regMensajeLabel.setBounds(50, 480, 320, 30);
+            regMensajeLabel.setBounds(100, 420, 600, 30);
             regMensajeLabel.setFont(texto2);
             panelRegistro.add(regMensajeLabel);
 
             registrarButton.addActionListener(e -> {
+            	String nombres = nombresField.getText();
+                String apellidos = apellidosField.getText();
+                String empresa = empresaField.getText();
+                String ambito = (String) ambitoCombo.getSelectedItem();
+                String cargo = cargoField.getText();
                 String usuario = regUsuarioField.getText();
                 String contraseña = new String(regContraseñaField.getPassword());
-                String email = emailField.getText();
+                String repetirContraseña = new String(repetirContraseñaField.getPassword());
+                String correo = correoField.getText();
                 
                 if (registrarListener != null) {
                     registrarListener.actionPerformed(new ActionEvent(registrarButton, ActionEvent.ACTION_PERFORMED, null) {
                         @Override
                         public Object getSource() {
-                            return new Object[] { usuario, contraseña, email };
+                            return new Object[] {nombres, apellidos, empresa, ambito, cargo, usuario, contraseña, repetirContraseña, correo };
                         }
                     });
                 }
                 
-                regMensajeLabel.setText("Registro exitoso");
-                regMensajeLabel.setForeground(Color.GREEN);
-                
+                nombresField.setText("");
+                apellidosField.setText("");
+                empresaField.setText("");
+                cargoField.setText("");
                 regUsuarioField.setText("");
                 regContraseñaField.setText("");
-                emailField.setText("");
+                repetirContraseñaField.setText("");
+                correoField.setText("");
             });
 
             regresarButton.addActionListener(e -> {
@@ -217,7 +363,7 @@ public class AuthView extends JFrame{
 	    homePanel.setBackground(Color.decode("#bfdeed"));
 	    homePanel.setBounds(0, 0, 500, 400);
 
-	    JLabel welcomeLabel = new JLabel("¡Bienvenido al Sistema!", SwingConstants.CENTER);
+	    JLabel welcomeLabel = new JLabel("Bienvenido al Sistema", SwingConstants.CENTER);
 	    welcomeLabel.setBounds(0, 50, 500, 50);
 	    welcomeLabel.setFont(texto);
 	    homePanel.add(welcomeLabel);

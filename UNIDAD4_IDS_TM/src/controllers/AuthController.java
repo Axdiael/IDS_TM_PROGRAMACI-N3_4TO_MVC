@@ -48,10 +48,31 @@ public class AuthController {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         Object[] data = (Object[]) e.getSource();
-                        String usuario = (String) data[0];
-                        String contraseña = (String) data[1];
-                        String email = (String) data[2];
-                        model.registro(usuario, contraseña, email);
+                        String nombres = (String) data[0];
+                        String apellidos = (String) data[1];
+                        String empresa = (String) data[2];
+                        String ambito = (String) data[3];
+                        String cargo = (String) data[4];
+                        String usuario = (String) data[5];
+                        String contraseña = (String) data[6];
+                        String repetirContrasena = (String) data[7];
+                        String correo = (String) data[8];
+
+                        String resultado = model.registro(nombres, apellidos, empresa, ambito, cargo, 
+                                                         usuario, contraseña, repetirContrasena, correo);
+                        if (resultado.equals("Registro completado")) {
+                            JOptionPane.showMessageDialog(view, 
+                                "Registro completado", 
+                                "Éxito", 
+                                JOptionPane.INFORMATION_MESSAGE);
+               
+                            view.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(view, 
+                                resultado, 
+                                "Error de registro", 
+                                JOptionPane.ERROR_MESSAGE);
+                        }
                     }
                 });
             }
