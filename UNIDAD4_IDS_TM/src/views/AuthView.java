@@ -350,7 +350,7 @@ public class AuthView extends JFrame{
         registroFrame.setVisible(true);
     }
 	
-	public void mostrarVentanaHome() {
+	/*public void mostrarVentanaHome() {
 	    JFrame homeFrame = new JFrame("Bienvenido - Home");
 	    homeFrame.setSize(500, 400);
 	    homeFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -383,7 +383,7 @@ public class AuthView extends JFrame{
 
 	    homeFrame.add(homePanel);
 	    homeFrame.setVisible(true);
-	}
+	}*/
 
     public String getUsuario() {
         return usuarioField.getText();

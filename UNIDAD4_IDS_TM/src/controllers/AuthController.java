@@ -29,7 +29,7 @@ public class AuthController {
 
                 if (model.autenticar(usuario, contraseña)) {
                     view.setVisible(false);
-                    view.mostrarVentanaHome(); 
+                    
                 } else {
                     JOptionPane.showMessageDialog(view, 
                         "Usuario o contraseña incorrectos", 
