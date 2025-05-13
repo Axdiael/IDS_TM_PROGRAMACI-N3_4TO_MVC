@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import models.AuthModel;
 import views.AuthView;
+import views.ProductView;
 
 
 public class AuthController {
@@ -29,6 +30,11 @@ public class AuthController {
 
                 if (model.autenticar(usuario, contraseña)) {
                     view.setVisible(false);
+                    
+                    view.dispose();
+                    
+                    ProductView vistaProducto = new ProductView();
+                    vistaProducto.mostrarLista();
                     
                 } else {
                     JOptionPane.showMessageDialog(view, 

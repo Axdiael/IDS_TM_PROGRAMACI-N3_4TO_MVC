@@ -13,16 +13,22 @@ public class ProductController {
         this.modelo = modelo;
         this.vista = vista;
     }
-
-    public void iniciar() {
-        List<Product> productos = modelo.cargarProductos();
-        vista.mostrarLista(productos);
+    
+    public ProductController() {
+        this.modelo = new ProductModel();
+        this.vista = new ProductView();
     }
 
-    public static void main(String[] args) {
-        ProductModel modelo = new ProductModel();
-        ProductView vista = new ProductView();
-        ProductController controlador = new ProductController(modelo, vista);
-        controlador.iniciar();
+    public void iniciar() {
+    	vista.mostrarLista();
+    }
+    
+    public void add() {
+		
+		vista.add();
+	}
+    
+    public void products() {
+        vista.mostrarLista();  
     }
 }
