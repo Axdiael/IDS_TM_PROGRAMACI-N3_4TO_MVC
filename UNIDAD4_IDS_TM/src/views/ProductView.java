@@ -19,6 +19,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class ProductView {
 
@@ -32,13 +34,43 @@ public class ProductView {
 
     public void mostrarLista() {
         JFrame ventana = new JFrame("Lista de Productos");
-        ventana.setSize(500, 300);
+        ventana.setSize(600, 300);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(new BorderLayout());
 
-        String[] columnas = {"ID", "Nombre", "Precio", "Stock"};
-        modelo = new DefaultTableModel(columnas, 0);
+        String[] columnas = {"ID", "Nombre", "Precio", "Stock", "Eliminar"};
+        modelo = new DefaultTableModel(columnas, 0) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         tabla = new JTable(modelo);
+        tabla.setRowHeight(30);
+
+        tabla.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int row = tabla.rowAtPoint(e.getPoint());
+                int column = tabla.columnAtPoint(e.getPoint());
+                if (column == 4 && row >= 0) {
+                    boolean exito = modeloProducto.remove(row);
+                    if (exito) {
+                        actualizarTabla();
+                    } else {
+                        JFrame errorFrame = new JFrame("Error");
+                        errorFrame.setSize(300, 100);
+                        errorFrame.setLocationRelativeTo(null);
+                        JLabel errorLabel = new JLabel("Error al eliminar el producto.");
+                        errorLabel.setHorizontalAlignment(JLabel.CENTER);
+                        errorFrame.add(errorLabel);
+                        errorFrame.setVisible(true);
+                    }
+                }
+            }
+        });
+
         JScrollPane scroll = new JScrollPane(tabla);
 
         JButton btnActualizar = new JButton("Actualizar");
@@ -55,6 +87,8 @@ public class ProductView {
                 pc.add(); 
             }
         });
+        
+        
 
         JPanel panelBotton = new JPanel();
         panelBoton.add(btnActualizar);
@@ -75,10 +109,15 @@ public class ProductView {
                 p.getId(),
                 p.getNombre(),
                 p.getPrecio(),
-                p.getStock()
+                p.getStock(),
+                "Eliminar"
             };
             modelo.addRow(fila);
         }
+        
+        
+        
+	
     }
 
     private void actualizarTabla() {

@@ -48,12 +48,60 @@ public class ProductModel {
                 }
             }
         } catch (Exception ex) {
-            System.err.println("Error al leer el archivo JSON: " + ex.getMessage());
+            System.err.println("Error al leer el archivo: " + ex.getMessage());
             ex.printStackTrace();
         }
         
         
         return lista;
+    }
+    public boolean remove(int indice) {
+        JSONParser jsonParser = new JSONParser();
+        JSONArray productList = new JSONArray();
+        
+        String url;
+        try {
+            url = getClass().getResource("/files/products.json").toURI().getPath();
+        } catch (Exception e) {
+            System.out.println("Error: No se obtuco la ruta del archivo ");
+            e.printStackTrace();
+            return false;
+        }
+        
+        try (FileReader reader = new FileReader(url)) {
+            Object obj = jsonParser.parse(reader);
+            productList = (JSONArray) obj;
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: archivo no encontrado: " + url);
+            e.printStackTrace();
+            return false;
+        } catch (IOException e) {
+            System.out.println("Error: problema al leer el archivo ");
+            e.printStackTrace();
+            return false;
+        } catch (ParseException e) {
+            System.out.println("Error: no se pudo parsear el archivo ");
+            e.printStackTrace();
+            return false;
+        }
+        
+        if (indice < 0 || indice >= productList.size()) {
+            System.out.println("Error: Índice inválido: " + indice);
+            return false;
+        }
+        
+        productList.remove(indice);
+        
+        try (FileWriter file = new FileWriter(url)) {
+            file.write(productList.toString());
+            file.flush();
+            file.close();
+            return true;
+        } catch (IOException e) {
+            System.out.println("Error: no se pudo escribir en el archivo");
+            e.printStackTrace();
+            return false;
+        }
     }
     public boolean addProducto(int identi, String nombre, double precio, int disp) {
         JSONParser jsonParser = new JSONParser();
