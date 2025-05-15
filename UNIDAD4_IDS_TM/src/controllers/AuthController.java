@@ -8,6 +8,7 @@ import javax.swing.JOptionPane;
 
 import models.AuthModel;
 import views.AuthView;
+import views.HomeView;
 import views.ProductView;
 
 
@@ -33,8 +34,9 @@ public class AuthController {
                     
                     view.dispose();
                     
-                    ProductView vistaProducto = new ProductView();
-                    vistaProducto.mostrarLista();
+                    HomeView home = new HomeView();
+                    home.setVisible(true);
+                    
                     
                 } else {
                     JOptionPane.showMessageDialog(view, 

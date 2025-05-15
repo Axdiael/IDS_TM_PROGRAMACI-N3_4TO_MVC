@@ -78,7 +78,7 @@ public class HomeView extends JFrame {
 		btnNewButton_2.setBackground(new Color(255, 255, 255));
 		panel_2.add(btnNewButton_2);
 		
-		JButton btnNewButton_1 = new JButton("Registros");
+		JButton btnNewButton_1 = new JButton("Productos");
 		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		btnNewButton_1.setBackground(new Color(255, 255, 255));
 		panel_2.add(btnNewButton_1);
@@ -179,13 +179,14 @@ public class HomeView extends JFrame {
 	
 		btnNewButton_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new UsuariosView().setVisible(true);
+				new UserView().setVisible(true);
 			}
 		});
 
 		btnNewButton_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				new RegistrosView().setVisible(true);
+				ProductView vistaProducto = new ProductView();
+                vistaProducto.mostrarLista();
 			}
 		});
 
