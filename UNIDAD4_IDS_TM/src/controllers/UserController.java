@@ -1,6 +1,7 @@
 package controllers;
 
 import models.UserModel;
+import models.Users;
 import views.UserView;
 
 public class UserController {
@@ -13,5 +14,9 @@ public class UserController {
         this.vista = vista;
 
         vista.setVisible(true);
+    }
+    
+    public void update(Users userToUpdate) {
+        vista.update(userToUpdate); 
     }
 }

@@ -73,4 +73,41 @@ public class UserModel {
 		
 		return false;
 	}
+    public boolean update(Users users) {
+        String query = "UPDATE `users` SET "
+                     + "`name` = '" + users.getName() + "', "
+                     + "`email` = '" + users.getEmail() + "', "
+                     + "`role` = '" + users.getRole() + "', "
+                     + "`phone` = '" + users.getPhone() + "', "
+                     + "`update_at` = NOW() "
+                     + "WHERE `users`.`id` = " + users.getId() + ";";
+                     
+        Connection conn = null;
+        Statement stmt = null;
+        
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/test", "root", "");
+            stmt = conn.createStatement();
+            
+            int rs = stmt.executeUpdate(query);
+            
+            if (rs > 0) 
+                return true;
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (stmt != null) stmt.close();
+                if (conn != null) conn.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        
+        return false;
+    }
+
+    
 }
